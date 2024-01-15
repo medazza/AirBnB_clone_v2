@@ -184,7 +184,7 @@ class TestBaseModel(unittest.TestCase):
 
     def test_pep8_BaseModel(self):
         """Testing for pep8"""
-        style = pep8.StyleGuide(quiet=True)
+        style = pycodestyle.StyleGuide(quiet=True)
         p = style.check_files(['models/base_model.py'])
         self.assertEqual(p.total_errors, 0, "fix pep8")
 
