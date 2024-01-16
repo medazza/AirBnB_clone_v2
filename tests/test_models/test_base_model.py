@@ -7,6 +7,7 @@ from uuid import UUID
 import json
 import os
 import pycodestyle
+import inspect
 
 
 class test_basemodel(unittest.TestCase):

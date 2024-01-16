@@ -4,6 +4,8 @@ from tests.test_models.test_base_model import test_basemodel
 from models.city import City
 import pycodestyle
 import unittest
+import os
+from models.base_model import BaseModel
 
 
 class test_City(test_basemodel):
@@ -61,7 +63,7 @@ class TestCity(unittest.TestCase):
 
     def test_pep8_City(self):
         """Tests pep8 style"""
-        style = pep8.StyleGuide(quiet=True)
+        style = pycodestyle.StyleGuide(quiet=True)
         p = style.check_files(['models/city.py'])
         self.assertEqual(p.total_errors, 0, "fix pep8")
 
