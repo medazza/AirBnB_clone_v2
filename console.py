@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-"""Defines the HBNB console."""
+"""Defines HBNB console."""
 import cmd
 from shlex import split
 from models import storage
@@ -14,35 +14,30 @@ from models.review import Review
 
 
 class HBNBCommand(cmd.Cmd):
-    """Defines the HolbertonBnB command interpreter."""
+    """Defines the HBNB command interpreter."""
 
-    prompt = "(hbnb) "
+    prompt = '(hbnb) '
     __classes = {
-        "BaseModel",
-        "User",
-        "State",
-        "City",
-        "Amenity",
-        "Place",
-        "Review"
+        "BaseModel", "User", "State",
+        "City", "Amenity", "Place", "Review"
     }
 
     def emptyline(self):
         """Ignore empty spaces."""
-        pass
+        return False
 
     def do_quit(self, line):
         """Quit command to exit the program."""
         return True
 
     def do_EOF(self, line):
-        """EOF signal to exit the program."""
+        """EOF signal to exit the console."""
         print("")
         return True
 
     def do_create(self, line):
-        """Usage: create <class> <key 1>=<value 2> <key 2>=<value 2> ...
-        Create a new class instance with given keys/values and print its id.
+        """Usage: create <class> <key 1>=<value 1> <key 2>=<value 2>
+        Create a new class instance with given k/v and print its id.
         """
         try:
             if not line:
@@ -75,7 +70,8 @@ class HBNBCommand(cmd.Cmd):
             print("** class doesn't exist **")
 
     def do_show(self, line):
-        """Prints the string representation of an instance
+        """Prints the string repre of an instance based on the
+        class and the id
         Exceptions:
             SyntaxError: when there is no args given
             NameError: when there is no object taht has the name
@@ -139,7 +135,7 @@ class HBNBCommand(cmd.Cmd):
 
     def do_all(self, line):
         """Usage: all or all <class> or <class>.all()
-        Display string representations of all instances of a given class.
+        Display string repres of all instances of a given class.
         If no class is specified, displays all instantiated objects."""
         if not line:
             o = storage.all()
@@ -157,7 +153,8 @@ class HBNBCommand(cmd.Cmd):
             print("** class doesn't exist **")
 
     def do_update(self, line):
-        """Updates an instanceby adding or updating attribute
+        """Updates an instance based on the class name,
+        id, attribute, value.
         Exceptions:
             SyntaxError: when there is no args given
             NameError: when there is no object taht has the name
@@ -202,9 +199,9 @@ class HBNBCommand(cmd.Cmd):
             print("** value missing **")
 
     def count(self, line):
-        """count the number of instances of a class
+        """count the number of instances of a class given.
         """
-        counter = 0
+        count = 0
         try:
             my_list = split(line, " ")
             if my_list[0] not in self.__classes:
@@ -213,13 +210,13 @@ class HBNBCommand(cmd.Cmd):
             for key in objects:
                 name = key.split('.')
                 if name[0] == my_list[0]:
-                    counter += 1
-            print(counter)
+                    count += 1
+            print(count)
         except NameError:
             print("** class doesn't exist **")
 
     def strip_clean(self, args):
-        """strips the argument and return a string of command
+        """strips the arg and return a string of command
         Args:
             args: input list of args
         Return:
@@ -242,8 +239,8 @@ class HBNBCommand(cmd.Cmd):
         return " ".join(i for i in new_list)
 
     def default(self, line):
-        """retrieve all instances of a class and
-        retrieve the number of instances
+        """retrieve all instances of a class given and
+        retrieve the number of it's instances
         """
         my_list = line.split('.')
         if len(my_list) >= 2:

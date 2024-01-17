@@ -11,13 +11,13 @@ Base = declarative_base()
 
 
 class BaseModel:
-    """A base class for all hbnb models"""
+    """The BaseModel class for all hbnb models be derived"""
     id = Column(String(60), unique=True, nullable=False, primary_key=True)
     created_at = Column(DateTime, nullable=False, default=(datetime.utcnow()))
     updated_at = Column(DateTime, nullable=False, default=(datetime.utcnow()))
 
     def __init__(self, *args, **kwargs):
-        """Instatntiates a new model"""
+        """Instatntiates a base model"""
         if kwargs:
             for key, value in kwargs.items():
                 if key == "created_at" or key == "updated_at":
@@ -61,5 +61,5 @@ class BaseModel:
         return my_dict
 
     def delete(self):
-        """ delete object from db"""
+        """ delete object from db storage"""
         models.storage.delete(self)

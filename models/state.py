@@ -10,7 +10,7 @@ import shlex
 
 
 class State(BaseModel, Base):
-    """This is the class for State
+    """The class for State
     Attributes:
         name: input name
     """
@@ -21,6 +21,7 @@ class State(BaseModel, Base):
 
     @property
     def cities(self):
+        """getter for list of city instances related to the state"""
         var = models.storage.all()
         lista = []
         result = []
