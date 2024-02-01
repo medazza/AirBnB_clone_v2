@@ -1,36 +1,20 @@
 #!/usr/bin/python3
 """
-    Fabric script that generates a .tgz archive
-    from the contents of the web_static
+Fabric script that generates a .tgz archive from the contents of the web_static
 """
 
 from fabric.api import local
-from datetime import datetime as dt
-import os
+import time
 
 
 def do_pack():
-    """ Function to create tarball of webstatic """
+    """generates a .tgz archive"""
 
-    # Use fabric's settings to handle warnings
-    with settings(warn_only=True):
-        # check if 'version' dir exits, create if not
-        isdir = os.path.isdir('versions')
-        if not isdir:
-            mkdir = local('mkdir versions')
-            if mkdir.failed:
-                return None
-
-            # Generate a timestamp for the archive filename
-        suffix = dt.now().strftime('%Y%m%d%M%S')
-
-        # Define the path for the tarball
-        path = 'versions/web_static_{}.tgz'.format(suffix)
-
-        # Create the tarball using the 'tar'
-        tar = local('tar -cvzf {} web_static/'.format(path))
-        if tar.failed:
-            return None
-        size = os.stat(path).st_size
-        print('web_static packed: {} -> {}Bytes'.format(path, size))
-        return path
+    try:
+        local("mkdir -p versions")
+        local("tar -cvzf versions/web_static_{}.tgz web_static/".
+              format(time.strftime("%Y%m%d%H%M%S")))
+        return ("versions/web_static_{}.tgz".format(time.
+                                                    strftime("%Y%m%d%H%M%S")))
+    except:
+        return None
