@@ -37,6 +37,7 @@ def number_hbnb(n):
     """ display “n is a number” only if n is an integer """
     return f'{n} is a number'
 
+
 @app.route('/number_template/<int:n>', strict_slashes=False)
 def num_temp_hbnb(n):
     """ display a HTML page only if n is an integer """
