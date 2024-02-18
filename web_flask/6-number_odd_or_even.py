@@ -47,7 +47,12 @@ def num_temp_hbnb(n):
 @app.route('/number_odd_or_even/<int:n>', strict_slashes=False)
 def num_odd_even_hbnb(n):
     """ display a HTML page only if n is an integer """
-    return render_template('6-number_odd_or_even.html', n=n)
+    if n % 2 == 0:
+        evenness = 'even'
+    else:
+        evenness = 'odd'
+    return render_template('6-number_odd_or_even.html', n=n,
+                           evenness=evenness)
 
 
 if __name__ == '__main__':
