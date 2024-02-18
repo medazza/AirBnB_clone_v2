@@ -10,6 +10,7 @@ from models.place import Place
 from models.review import Review
 import shlex
 
+
 class FileStorage:
     """This class manages storage of hbnb models in JSON format
     Attributes:
