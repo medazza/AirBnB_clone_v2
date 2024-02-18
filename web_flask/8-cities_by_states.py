@@ -22,15 +22,11 @@ def states_list():
     states = sorted(states, key=lambda k: k.name)
     return render_template('7-states_list.html', states=states)
 
+
 @app.route('/cities_by_states', strict_slashes=False)
 def cities_list():
     states = storage.all(State).values()
-    states = sorted(states, key=lambda k: k.name)
-    state_ct = []
-    for state in states:
-        state_ct.append([state, sorted(state.cities, key=lambda k: k.name)])
-    return render_template('8-cities_by_states.html',
-                           states=state_ct, h_1="states")
+    return render_template('8-cities_by_states.html', states=states)
 
 
 if __name__ == '__main__':
